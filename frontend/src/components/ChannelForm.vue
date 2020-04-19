@@ -49,9 +49,9 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat @click="save" :disabled="this.$store.state.query.loading" color="primary">OK</v-btn>
+          <v-btn flat @click="save" :disabled="$store.state.query.loading || !channel.channel_name" color="primary">OK</v-btn>
           <v-btn flat @click="$router.go(-1)" color="primary">Cancel</v-btn>
-          <v-btn flat @click="save" :disabled="this.$store.state.query.loading" color="primary" :class="{'d-none': !applyButton}">Apply</v-btn>
+          <v-btn flat @click="save" :disabled="$store.state.query.loading || !channel.channel_name" color="primary" :class="{'d-none': !applyButton}">Apply</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -72,7 +72,9 @@ export default {
       // Object or array defaults must be returned from a factory function
       // See: https://vuejs.org/v2/guide/components-props.html
       default() {
-        return {}
+        return {
+          channel_name: ""
+        }
       }
     }
   },
